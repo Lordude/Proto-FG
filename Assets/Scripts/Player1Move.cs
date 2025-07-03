@@ -9,12 +9,18 @@ public class Player1Move : MonoBehaviour
     private AnimatorStateInfo Player1Layer0;
     private bool CanWalkLeft = true;
     private bool CanWalkRight = true;
+    public GameObject Player1;
+    public GameObject Player2;
+    public Vector3 Player2Position;
+    private bool FacingLeft = false;
+    private bool FacingRight = true;
 
 
 
     void Start()
     {
         Anim = GetComponentInChildren<Animator>();
+        StartCoroutine(FaceRight());
     }
 
     void Update()
@@ -36,6 +42,27 @@ public class Player1Move : MonoBehaviour
             CanWalkLeft=  true;
         }
 
+        //Get opponent position and flip if appropriate
+        Player2Position = Player2.transform.position;
+
+        if(Player2Position.x > Player1.transform.position.x)
+        {
+            StartCoroutine(FaceLeft());
+        }
+        if(Player2Position.x < Player1.transform.position.x)
+        {
+            StartCoroutine(FaceRight());
+        }
+
+        // if(Player2Position.x > transform.position.x)
+        // {
+        //     StartCoroutine(LeftIsTrue());
+        // }
+        // if(Player2Position.x < transform.position.x)
+        // {
+        //     StartCoroutine(RightIsTrue());
+        // }
+
         //Walking left and right
         if(Player1Layer0.IsTag("Motion"))
         {
@@ -44,7 +71,7 @@ public class Player1Move : MonoBehaviour
                 if(CanWalkRight == true)
                 {
                     Anim.SetBool("Forward", true);
-                    transform.Translate(0, 0, WalkSpeed);
+                    transform.Translate(WalkSpeed, 0, 0);
                 }
             }
             if(Input.GetAxis("Horizontal") < 0)
@@ -52,7 +79,7 @@ public class Player1Move : MonoBehaviour
                 if(CanWalkLeft == true)
                 {
                     Anim.SetBool("Backward", true);
-                    transform.Translate(0, 0, -WalkSpeed);
+                    transform.Translate(-WalkSpeed, 0, 0);
                 }
 
             }
@@ -83,9 +110,34 @@ public class Player1Move : MonoBehaviour
         }
     }
 
+
     IEnumerator JumpPause()
     {
         yield return new WaitForSeconds(1.0f);
         IsJumping = false;
+    }
+
+    IEnumerator FaceLeft()
+    {
+        if(FacingLeft == true)
+        {
+            FacingLeft = false;
+            FacingRight = true;
+            yield return new WaitForSeconds(0.15f);
+            Player1.transform.Rotate(0, -180, 0);
+            Anim.SetLayerWeight(1, 0);
+        }
+    }
+
+    IEnumerator FaceRight()
+    {
+        if(FacingRight == true)
+        {
+            FacingLeft = true;
+            FacingRight = false;
+            yield return new WaitForSeconds(0.15f);
+            Player1.transform.Rotate(0, 180, 0);
+            Anim.SetLayerWeight(1, 1);
+        }
     }
 }

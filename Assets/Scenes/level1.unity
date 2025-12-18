@@ -1625,8 +1625,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3160d0ea048db04fa2fd057e073fe49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpHeight: 1
+  JumpHeight: 2
   Player1: {fileID: 1883658324}
+  rb: {fileID: 1883658325}
 --- !u!1 &780897981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,9 +1678,10 @@ GameObject:
   - component: {fileID: 789363188}
   - component: {fileID: 789363187}
   - component: {fileID: 789363186}
+  - component: {fileID: 789363190}
   m_Layer: 1
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1773,6 +1775,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 780897982}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &789363190
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789363185}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2716,6 +2739,7 @@ MonoBehaviour:
   Player1: {fileID: 552697686}
   Player2: {fileID: 1195649407}
   Player2Position: {x: 0, y: 0, z: 0}
+  ground: {fileID: 789363185}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

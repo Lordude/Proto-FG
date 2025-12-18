@@ -4,6 +4,11 @@ public class Player1Actions : MonoBehaviour
 {
     public float JumpHeight = 0.01f;
     public GameObject Player1;
+    public Rigidbody rb;
+    private bool JumpUpTrue = false;
+    private bool JumpForwardTrue = false;
+    private bool JumpBackTrue = false;
+    private float thrust = 40f;
     
 
     void Start()
@@ -11,24 +16,35 @@ public class Player1Actions : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    //Apply force to jumping rigidbody in fixedUpdate
+    void FixedUpdate()
     {
-        
+        if(JumpUpTrue == true){
+            JumpUpTrue = false;
+            rb.AddForce(0, thrust, 0, ForceMode.Impulse);
+        }
+        if(JumpForwardTrue == true){
+            JumpForwardTrue = false;
+            rb.AddForce(15f, thrust, 0, ForceMode.Impulse);
+        }
+        if(JumpBackTrue == true){
+            JumpBackTrue = false;
+            rb.AddForce(15f, thrust, 0, ForceMode.Impulse);
+        }
     }
 
+
+    //jump functions called in animation
     public void JumpUp()
     {
-        Player1.transform.Translate(0, JumpHeight, 0);
+        JumpUpTrue = true;
     }
     public void JumpForward()
     {
-        Player1.transform.Translate(0, JumpHeight, 0);
-        Player1.transform.Translate(0.5f, 0, 0);
+        JumpForwardTrue = true;
     }
     public void JumpBack()
     {
-        Player1.transform.Translate(0, JumpHeight, 0);
-        Player1.transform.Translate(-0.5f, 0, 0);
+        JumpBackTrue = true;
     }
 }

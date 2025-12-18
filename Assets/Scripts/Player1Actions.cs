@@ -21,4 +21,14 @@ public class Player1Actions : MonoBehaviour
     {
         Player1.transform.Translate(0, JumpHeight, 0);
     }
+    public void JumpForward()
+    {
+        Player1.transform.Translate(0, JumpHeight, 0);
+        Player1.transform.Translate(0.5f, 0, 0);
+    }
+    public void JumpBack()
+    {
+        Player1.transform.Translate(0, JumpHeight, 0);
+        Player1.transform.Translate(-0.5f, 0, 0);
+    }
 }
